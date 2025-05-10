@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/settingsHostLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/settingsHostEdit"
+        android:text="@string/settings_host_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/settingsHostEdit"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/settingsHostLabel"
+        app:layout_constraintTop_toBottomOf="@+id/settingsHostLabel" />
+
+    <TextView
+        android:id="@+id/settingsUserLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/settingsUserEdit"
+        android:text="@string/settings_user_label"
+        app:layout_constraintStart_toStartOf="@+id/settingsHostEdit"
+        app:layout_constraintTop_toBottomOf="@+id/settingsHostEdit" />
+
+    <EditText
+        android:id="@+id/settingsUserEdit"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/settingsHostEdit"
+        app:layout_constraintStart_toStartOf="@+id/settingsUserLabel"
+        app:layout_constraintTop_toBottomOf="@+id/settingsUserLabel" />
+
+    <TextView
+        android:id="@+id/settingsPassLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/settingsPassEdit"
+        android:text="@string/settings_pass_label"
+        app:layout_constraintStart_toStartOf="@+id/settingsUserEdit"
+        app:layout_constraintTop_toBottomOf="@+id/settingsUserEdit" />
+
+    <EditText
+        android:id="@+id/settingsPassEdit"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/settingsUserEdit"
+        app:layout_constraintStart_toStartOf="@+id/settingsPassLabel"
+        app:layout_constraintTop_toBottomOf="@+id/settingsPassLabel" />
+
+    <Button
+        android:id="@+id/settings_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/settings_save_label"
+        app:layout_constraintEnd_toEndOf="@+id/settingsPassEdit"
+        app:layout_constraintTop_toBottomOf="@+id/settingsPassEdit" />
+</androidx.constraintlayout.widget.ConstraintLayout>

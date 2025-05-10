@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">marshGallery</string>
+    <string name="preference_file_key">dev.mforcen.marshgallery.preferences</string>
+    <string name="settings_button_speak" translatable="true">Settings</string>
+    <string name="settings_connection" translatable="true">Connection</string>
+    <string name="settings_host_label" translatable="true">Host</string>
+    <string name="settings_user_label" translatable="true">User</string>
+    <string name="settings_pass_label" translatable="true">Password</string>
+    <string name="settings_save_label" translatable="true">Save</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_photo">PhotoActivity</string>
+    <string name="image_view_description">Photo view</string>
+    <string name="exit_button_label">Exit</string>
+    <string name="start_gallery_label">Start gallery</string>
+    <string name="next_label">Next</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
