@@ -13,6 +13,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import dev.mforcen.marshgallery.databinding.ActivityPhotoBinding
 import kotlin.concurrent.thread
 
@@ -24,6 +25,7 @@ class PhotoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPhotoBinding
     private lateinit var fullscreenContent: ImageView
     private lateinit var fullscreenContentControls: LinearLayout
+    private lateinit var photoUrlView: TextView
     private val hideHandler = Handler(Looper.myLooper()!!)
     private val changePhotoHandler = Handler(Looper.myLooper()!!)
     private var gallery: Gallery? = null
@@ -51,6 +53,7 @@ class PhotoActivity : AppCompatActivity() {
         // Delayed display of UI elements
         supportActionBar?.show()
         fullscreenContentControls.visibility = View.VISIBLE
+        photoUrlView.visibility = View.VISIBLE
     }
     private var isFullscreen: Boolean = false
 
@@ -94,6 +97,7 @@ class PhotoActivity : AppCompatActivity() {
         fullscreenContent.setOnClickListener { toggle() }
 
         fullscreenContentControls = binding.fullscreenContentControls
+        photoUrlView = binding.photoUrlView
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
@@ -145,6 +149,7 @@ class PhotoActivity : AppCompatActivity() {
         // Hide UI first
         supportActionBar?.hide()
         fullscreenContentControls.visibility = View.GONE
+        photoUrlView.visibility = View.GONE
         isFullscreen = false
 
         // Schedule a runnable to remove the status and navigation bar after a delay
@@ -188,9 +193,12 @@ class PhotoActivity : AppCompatActivity() {
             if(bitmap != null) {
                 bitmap!!.recycle()
             }
-            bitmap = this.gallery!!.getRandomPhoto()
-            if(bitmap == null) return@thread
-            runOnUiThread { fullscreenContent.setImageBitmap(bitmap) }
+            val pair = this.gallery!!.getRandomPhoto() ?: return@thread
+            bitmap = pair.second
+            runOnUiThread {
+                fullscreenContent.setImageBitmap(bitmap)
+                photoUrlView.text = pair.first
+            }
             delayedPhotoChange(600000)
         }
     }
