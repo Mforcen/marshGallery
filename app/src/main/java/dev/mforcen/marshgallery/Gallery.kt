@@ -19,8 +19,8 @@ import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
 class Gallery (private val host: String, private val user: String, private val pass: String){
-    var photos: List<String> = listOf()
-    val random = Random(System.currentTimeMillis())
+    private var photos: List<String> = listOf()
+    private val random = Random(System.currentTimeMillis())
     fun getList() {
         val authHandler = BasicDigestAuthHandler(
             domain = null,
@@ -53,7 +53,7 @@ class Gallery (private val host: String, private val user: String, private val p
         Log.d("Gallery", "Found ${photos.size} photos")
     }
 
-    fun getLocalPath(inval: String): String {
+    private fun getLocalPath(inval: String): String {
         var counter = 7 // Nextcloud paths have 7 / before account url
         var curr = inval
         while(counter > 0) {
@@ -65,7 +65,7 @@ class Gallery (private val host: String, private val user: String, private val p
         return curr
     }
 
-    fun decodeForRender(stream: InputStream): Bitmap {
+    private fun decodeForRender(stream: InputStream): Bitmap {
         var bodyContent = ByteArrayOutputStream()
         var chunk = ByteArray(1024)
         while(true) {
@@ -76,7 +76,6 @@ class Gallery (private val host: String, private val user: String, private val p
             bodyContent.write(chunk, 0, readBytes)
         }
         var exif = ExifInterface(ByteArrayInputStream(bodyContent.toByteArray()))
-        Log.d("imagedata", "rotation: ${exif.rotationDegrees}")
         var bitmap = BitmapFactory.decodeStream(ByteArrayInputStream(bodyContent.toByteArray()))
         if(bitmap.width > 1920 || bitmap.height > 1080) {
             val aspectRatio = bitmap.width / bitmap.height.toFloat()
