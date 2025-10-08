@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import dev.mforcen.marshgallery.databinding.ActivityPhotoBinding
+import kotlinx.coroutines.Runnable
 import kotlin.concurrent.thread
 
 /**
@@ -131,9 +132,26 @@ class PhotoActivity : AppCompatActivity() {
             return
         }
         this.gallery = Gallery(host, user, pass)
+        refreshGallery()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        changePhotoHandler.removeCallbacksAndMessages(null)
+        hideHandler.removeCallbacksAndMessages(null)
+    }
+
+    fun refreshGallery () {
         thread {
-            this.gallery!!.getList()
-            newPhoto()
+            try {
+                this.gallery!!.getList()
+                newPhoto()
+            } catch (e: Exception) {
+                changePhotoHandler.postDelayed(Runnable { refreshGallery() }, 10000)
+                runOnUiThread {
+                    photoUrlView.text = "Unable to get photo list: " + e.toString()
+                }
+            }
         }
     }
 
@@ -193,13 +211,18 @@ class PhotoActivity : AppCompatActivity() {
             if(bitmap != null) {
                 bitmap!!.recycle()
             }
-            val pair = this.gallery!!.getRandomPhoto() ?: return@thread
-            bitmap = pair.second
-            runOnUiThread {
-                fullscreenContent.setImageBitmap(bitmap)
-                photoUrlView.text = pair.first
+            try {
+                val pair = this.gallery!!.getRandomPhoto() ?: return@thread
+                bitmap = pair.second
+                runOnUiThread {
+                    fullscreenContent.setImageBitmap(bitmap)
+                    photoUrlView.text = pair.first
+                }
+                delayedPhotoChange(600000)
+            } catch (e: Exception) {
+                photoUrlView.text = "Unable to get photo: " + e.toString()
+                delayedPhotoChange(10000)
             }
-            delayedPhotoChange(600000)
         }
     }
 
