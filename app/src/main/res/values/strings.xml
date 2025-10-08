@@ -15,4 +15,6 @@
     <string name="next_label">Next</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="autostart_text">Starting in %d seconds</string>
 </resources>
