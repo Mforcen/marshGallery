@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "dev.mforcen.marshgallery"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "dev.mforcen.marshgallery"
