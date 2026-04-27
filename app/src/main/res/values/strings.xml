@@ -7,6 +7,7 @@
     <string name="settings_user_label" translatable="true">User</string>
     <string name="settings_pass_label" translatable="true">Password</string>
     <string name="settings_save_label" translatable="true">Save</string>
+    <string name="settings_prefix" translatable="true">Prefix</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_photo">PhotoActivity</string>
     <string name="image_view_description">Photo view</string>

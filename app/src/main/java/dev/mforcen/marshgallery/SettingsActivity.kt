@@ -29,10 +29,12 @@ class SettingsActivity : ComponentActivity() {
         val host = sharedPref.getString("marshgallery-host", "")
         val user = sharedPref.getString("marshgallery-user", "")
         val pass = sharedPref.getString("marshgallery-pass", "")
+        val prefix = sharedPref.getString("marshgallery-prefix", "")
 
         findViewById<EditText>(R.id.settingsHostEdit).setText(host)
         findViewById<EditText>(R.id.settingsUserEdit).setText(user)
         findViewById<EditText>(R.id.settingsPassEdit).setText(pass)
+        findViewById<EditText>(R.id.settingsPrefixEdit).setText(prefix)
     }
 
     private fun saveSettings() {
@@ -44,11 +46,13 @@ class SettingsActivity : ComponentActivity() {
         val hostEdit = findViewById<EditText>(R.id.settingsHostEdit).text.toString()
         val userEdit = findViewById<EditText>(R.id.settingsUserEdit).text.toString()
         val passEdit = findViewById<EditText>(R.id.settingsPassEdit).text.toString()
+        val prefixEdit = findViewById<EditText>(R.id.settingsPrefixEdit).text.toString()
 
         with(sharedPref.edit()){
             putString("marshgallery-host", hostEdit)
             putString("marshgallery-user", userEdit)
             putString("marshgallery-pass", passEdit)
+            putString("marshgallery-prefix", prefixEdit)
             apply()
         }
 
